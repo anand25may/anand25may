@@ -49,7 +49,7 @@ stages:
             inputs:
               action: 'deploy'
               kubernetesServiceConnection: 'kubernetes sc'
-              namespace: 'dev'
+              namespace: 'anand'
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
