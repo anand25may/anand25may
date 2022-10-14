@@ -13,27 +13,27 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        containerRegistry: 'kdAksChallenge'
-        repository: 'sampleapp'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
-        tags: 'latest'
+    # - task: Docker@2
+    #   displayName: Build an image
+    #   inputs:
+    #     containerRegistry: 'kdAksChallenge'
+    #     repository: 'sampleapp'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
+    #     tags: 'latest'
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)/s/kubernetes'
+        targetPath: '$(Pipeline.Workspace)/s/rnd'
         artifact: 'manifests'
         publishLocation: 'pipeline'
 
 - stage: Deploy
   displayName: Deploy to Dev
   dependsOn: Build
-  variables:
-    acrsecret: kdAksChallenge
-    acrdevurl: 'kdakschallenge.azurecr.io'
-    replicaNo: 3
+  # variables:
+  #   acrsecret: kdAksChallenge
+  #   acrdevurl: 'kdakschallenge.azurecr.io'
+  #   replicaNo: 3
   jobs:
   - deployment: Deploy
     displayName: Deploy to AKS
@@ -52,8 +52,8 @@ stages:
           - task: KubernetesManifest@0
             inputs:
               action: 'deploy'
-              kubernetesServiceConnection: 'aks'
-              namespace: 'default'
+              kubernetesServiceConnection: 'kubernetes sc'
+              namespace: 'dev'
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
