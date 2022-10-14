@@ -30,14 +30,10 @@ stages:
 - stage: Deploy
   displayName: Deploy to Dev
   dependsOn: Build
-  # variables:
-  #   acrsecret: kdAksChallenge
-  #   acrdevurl: 'kdakschallenge.azurecr.io'
-  #   replicaNo: 3
   jobs:
   - deployment: Deploy
     displayName: Deploy to AKS
-    environment: 'k8sdev.default'
+    environment: 'default'
     pool: 
       vmImage: ubuntu-latest
     strategy:
