@@ -34,8 +34,8 @@ stages:
   - deployment: Deploy
     displayName: Deploy to AKS
     environment: 'default'
-    pool: 
-      vmImage: ubuntu-latest
+    # pool: 
+    #   vmImage: ubuntu-latest
     strategy:
       runOnce:
         deploy:
