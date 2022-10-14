@@ -1,10 +1,10 @@
 trigger:
 - none
-
-resources:
-- repo: self
 pool:
       vmImage: ubuntu-latest
+resources:
+- repo: self
+
 stages:
 - stage: Build
   displayName: Build image
